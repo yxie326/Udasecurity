@@ -1,0 +1,9 @@
+# Created at 2022-12-06T02:26:44.735
+Corrupted STDOUT by directly writing to native stream in forked JVM 1. Stream 'Error occurred during initialization of boot layer'.
+
+# Created at 2022-12-06T02:26:44.738
+Corrupted STDOUT by directly writing to native stream in forked JVM 1. Stream 'java.lang.RuntimeException: Unable to parse --add-opens <module>/<package>:'.
+
+# Created at 2022-12-06T02:26:44.739
+Corrupted STDOUT by directly writing to native stream in forked JVM 1. Stream 'com.udacity.catpoint.security.service'.
+
