@@ -10,6 +10,7 @@ import com.udacity.catpoint.security.data.Sensor;
 import java.awt.image.BufferedImage;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 /**
  * Service that receives information about changes to the security system. Responsible for
@@ -58,8 +59,10 @@ public class SecurityService {
      * Internal method that resets all sensors to inactive.
      */
     private void setAllSensorsInactive() {
-        getSensors().stream().forEach(sensor -> changeSensorActivationStatus(sensor, false));
+        ConcurrentSkipListSet<Sensor> sensors = new ConcurrentSkipListSet<>(getSensors());
+        sensors.stream().forEach(sensor -> changeSensorActivationStatus(sensor, false));
     }
+
     /**
      * Internal method that checks if all sensors are inactive.
      * @return
@@ -67,6 +70,7 @@ public class SecurityService {
     private boolean allSensorsAreInactive() {
         return getSensors().stream().allMatch(sensor -> !sensor.getActive());
     }
+
 
     /**
      * Internal method that handles alarm status changes based on whether
@@ -114,6 +118,7 @@ public class SecurityService {
         switch(securityRepository.getAlarmStatus()) {
             case NO_ALARM -> setAlarmStatus(AlarmStatus.PENDING_ALARM);
             case PENDING_ALARM -> setAlarmStatus(AlarmStatus.ALARM);
+            default -> {}
         }
     }
 
