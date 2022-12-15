@@ -60,7 +60,8 @@ public class SecurityService {
      */
     private void setAllSensorsInactive() {
         ConcurrentSkipListSet<Sensor> sensors = new ConcurrentSkipListSet<>(getSensors());
-        sensors.stream().forEach(sensor -> changeSensorActivationStatus(sensor, false));
+        sensors.forEach(sensor -> changeSensorActivationStatus(sensor, false));
+        statusListeners.forEach(StatusListener::sensorStatusChanged);
     }
 
     /**
@@ -68,7 +69,7 @@ public class SecurityService {
      * @return
      */
     private boolean allSensorsAreInactive() {
-        return getSensors().stream().allMatch(sensor -> !sensor.getActive());
+        return getSensors().stream().noneMatch(Sensor::getActive);
     }
 
 
